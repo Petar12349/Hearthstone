@@ -3,7 +3,7 @@
     <div>
       <b-jumbotron class="navig" header="HEARTHSTONE" lead="Heroes of Warcraft ">
         <div class="dugme1">
-          <b-dropdown show variant="primary" id="dropdown1" text="Extra Options" class="m-md-2">
+          <b-dropdown show variant="primary" id="dropdown1" text="Options" class="m-md-2">
             <b-dropdown-item href="https://www.hearthstonetopdecks.com">Decks</b-dropdown-item>
             <b-dropdown-item href="https://playhearthstone.com/en-us/new-to-hearthstone/">About</b-dropdown-item>
             <b-dropdown-item href="https://playhearthstone.com/en-us/">Official Site</b-dropdown-item>
@@ -17,7 +17,7 @@
         type="text"
         v-model="search"
         class="search-bar"
-        placeholder="SEARCH"
+        placeholder="  SEARCH ..."
         @keyup.enter="dohvatiPodatke"
       />
     </div>
@@ -40,16 +40,13 @@
           </b-card-text>
 
           <hr />
-
           <b-card-text>{{ Card.strAbilites }}</b-card-text>
-
           <hr />
 
           <b-button href="https://playhearthstone.com/en-us/cards" variant="primary">More</b-button>
         </b-card>
       </b-col>
     </b-row>
-
     <br />
   </div>
 </template>
@@ -58,65 +55,55 @@
 export default {
   name: "App",
 
-  data() {
+  data: function () {
     return {
-      api_key:'d22edff2f1mshc22339c843d98e9p19504djsn120ff101fe25',
-      url_base:'https://omgvamp-hearthstone-v1.p.rapidapi.com/cards',
-      search: ``,
-      karte: []
+      // naziov niza
     };
   },
 
   methods: {
-    dohvatiPodatke (e) {
-      if (e.key == "Enter"  ) {
-        fetch(`${this.url_base} karte?=${this.search}%7Bname%7D%APPID=${this.api_key}`)
-          .then(res => {
-            return res.json();
-        }).then(this.setResults);
-    }
-  },
-  
-  setResults (results) {
-    this.karte = results;
-  },
-}
-}
-
+    dohvati_podatak: function () {
+      this.axios.get("https://omgvamp-hearthstone-v1.p.rapidapi.com/info").then((response) => {
+        console.log(response.data);
+      });
+    },
+  }
+};
 </script>
 
 <style>
 .navig {
-  color: white;
+  color: purple;
   font-style: Arial;
   transition: 0.7s;
   font-family: Arial, Helvetica, sans-serif;
   border-bottom-width: thick, black;
-  background-size: 70% 120%;
   background-position: bottom;
-  background-color: black;
-  background-image: url("https://cdn.hipwallpaper.com/i/53/62/zAFf4k.png");
+  background-color: purple;
+  display: block;
+  position: relative;
 }
 
-body,
-html {
+.html {
   height: 100%;
-  background-image: url("https://i7.pngguru.com/preview/409/684/989/hearthstone-texture-mapping-3d-computer-graphics-animation-chocolate-background.jpg");
+  background-color: white;
   background-size: 30% 105%;
+  background-image: url("./assets/smoke.png");
 }
 
 .search-box .search-bar {
   display: block;
-  width: 100%;
-  padding: 15px;
-  color: #ffff00;
+  padding: 0px;
+  color: rgba(4, 3, 66);
   font-size: 20px;
 
-  width: 25%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 10%;
   transition: 0.7s;
   margin-bottom: 30px;
-  border-radius: 0px 16px 16px 0px;
-  box-shadow: 0px 0px 8px rgba(1, 1, 1, 1);
+  border-radius: 0px 0px 16px 16px;
+  box-shadow: 0px 0px 0px rgba(1, 1, 1, 1);
 
   appearance: none;
   border: none;
@@ -125,10 +112,17 @@ html {
 }
 
 .search-box .search-bar:focus {
-  width: 100%;
-  margin-bottom: 30px;
+  width: 97%;
+  margin-bottom: 0px;
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 1);
-  background-color: rgba(206, 181, 81);
-  margin-bottom: 30px;
+  background-color: rgba(137, 171, 227);
+  opacity: 0.7;
+  color: white;
+}
+
+#app {
+  background-image: url("./assets/smoke.png");
+  background-size: cover;
+  background-position: bottom;
 }
 </style>
